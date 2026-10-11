@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEXUS AI Studio - Powerful Coding & Chat</title>
+  <title>NEXUS AI Studio - Production AI Suite</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,9 +14,9 @@
         extend: {
           colors: {
             brand: { 50: '#eef2ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 900: '#312e81' },
-            darkbg: '#0B0F17',
-            darkcard: '#111827',
-            darkborder: '#1F2937'
+            darkbg: '#07090E',
+            darkcard: '#0D111A',
+            darkborder: '#1E2530'
           }
         }
       }
@@ -31,78 +31,99 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-  <!-- ADSTERRA POPUNDER CODE HERE (Optional) -->
+  <!-- ADSTERRA POPUNDER SCRIPT (Paste here when ready) -->
 
   <style>
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0B0F17; }
-    ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #374151; }
-    .prose code { background: #1f2937; padding: 2px 6px; border-radius: 4px; color: #f3f4f6; }
-    .prose pre { background: transparent; padding: 0; margin: 0; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #07090E; }
+    ::-webkit-scrollbar-thumb { background: #1E2530; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    .prose code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #58a6ff; font-size: 0.875rem; }
+    .prose pre { background: #0d1117 !important; border: 1px solid #21262d; border-radius: 8px; }
   </style>
 </head>
 <body class="bg-darkbg text-slate-100 h-full flex flex-col font-sans overflow-hidden">
 
-  <!-- TOP AD BANNER SLOT -->
-  <div id="top-ad-slot" class="w-full bg-slate-900 border-b border-slate-800 py-1 px-4 text-center text-xs text-slate-400 flex items-center justify-center min-h-[50px]">
-    <!-- PASTE YOUR BANNER AD SCRIPT HERE -->
-    <div class="border border-dashed border-slate-700 px-4 py-1 rounded text-slate-500">
-      📢 Top Banner Ad Space
-    </div>
+  <!-- TOP AD BANNER SLOT (Clean & Invisible until Ad code added) -->
+  <div id="top-ad-slot" class="w-full bg-darkcard/50 border-b border-darkborder flex items-center justify-center min-h-[0px] overflow-hidden">
+    <!-- PASTE YOUR ADSTERRA BANNER SCRIPT HERE -->
   </div>
 
   <!-- MAIN APP WRAPPER -->
-  <div class="flex-1 flex overflow-hidden">
+  <div class="flex-1 flex overflow-hidden relative">
+
+    <!-- MOBILE SIDEBAR BACKDROP -->
+    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-20 hidden md:hidden backdrop-blur-sm transition-opacity"></div>
 
     <!-- SIDEBAR -->
-    <aside id="sidebar" class="w-72 bg-darkcard border-r border-darkborder flex flex-col transition-all duration-300 z-20 absolute md:relative inset-y-0 -translate-x-full md:translate-x-0">
+    <aside id="sidebar" class="w-72 bg-darkcard border-r border-darkborder flex flex-col transition-transform duration-300 z-30 absolute md:relative inset-y-0 -translate-x-full md:translate-x-0 shadow-2xl md:shadow-none">
       
       <!-- Brand Logo & New Chat -->
       <div class="p-4 border-b border-darkborder flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="p-2 bg-brand-600 rounded-lg text-white">
+        <div class="flex items-center gap-2.5">
+          <div class="p-2 bg-gradient-to-tr from-brand-600 to-indigo-500 rounded-xl text-white shadow-lg shadow-brand-600/30">
             <i data-lucide="bot" class="w-5 h-5"></i>
           </div>
-          <span class="font-bold text-lg tracking-wide text-white">NEXUS <span class="text-brand-500">AI</span></span>
+          <span class="font-black text-lg tracking-wider text-white">NEXUS <span class="text-brand-500">AI</span></span>
         </div>
-        <button id="new-chat-btn" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition" title="New Chat">
+        <button id="new-chat-btn" class="p-2 hover:bg-slate-800/80 rounded-xl text-slate-400 hover:text-white transition" title="New Chat">
           <i data-lucide="square-pen" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <!-- Mode Selector -->
-      <div class="p-4 border-b border-darkborder">
-        <label class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-2">Execution Mode</label>
-        <select id="mode-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg p-2.5 focus:border-brand-500 outline-none">
-          <option value="normal">💬 Mode 1: Normal Chat</option>
-          <option value="coding">⚡ Mode 2: Pro Coding & Architecture</option>
-          <option value="agentic">🚀 Mode 3: Agentic Full Expert Mode</option>
-        </select>
+      <!-- Custom Premium Mode Dropdown -->
+      <div class="p-4 border-b border-darkborder relative">
+        <label class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-2">Execution Mode</label>
+        <div class="relative">
+          <button id="mode-dropdown-toggle" class="w-full bg-slate-900/90 border border-slate-800 hover:border-slate-700 text-slate-200 text-xs font-medium rounded-xl p-3 flex items-center justify-between transition shadow-inner">
+            <span id="current-mode-label" class="flex items-center gap-2 truncate">💬 Mode 1: Normal Chat</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
+          </button>
+          <div id="mode-dropdown-menu" class="hidden absolute top-full left-0 right-0 mt-1.5 bg-darkcard border border-darkborder rounded-xl shadow-2xl z-50 overflow-hidden py-1 divide-y divide-darkborder">
+            <div class="mode-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition flex items-center gap-2" data-value="normal" data-label="💬 Mode 1: Normal Chat">
+              💬 Mode 1: Normal Chat
+            </div>
+            <div class="mode-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition flex items-center gap-2" data-value="coding" data-label="⚡ Mode 2: Pro Coding & Architecture">
+              ⚡ Mode 2: Pro Coding & Architecture
+            </div>
+            <div class="mode-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition flex items-center gap-2" data-value="agentic" data-label="🚀 Mode 3: Agentic Full Expert">
+              🚀 Mode 3: Agentic Full Expert
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- AI Model Selector -->
-      <div class="p-4 border-b border-darkborder">
-        <label class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-2">AI Model</label>
-        <select id="model-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2 focus:border-brand-500 outline-none">
-          <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Best Coding)</option>
-          <option value="openai/gpt-4o">GPT-4o (Logic & General)</option>
-          <option value="deepseek/deepseek-chat">DeepSeek V3 (Ultra Fast)</option>
-          <option value="google/gemini-2.0-flash-001">Gemini 2.0 Flash</option>
-        </select>
+      <!-- Custom Premium Model Dropdown -->
+      <div class="p-4 border-b border-darkborder relative">
+        <label class="text-[11px] text-slate-400 font-bold uppercase tracking-wider block mb-2">AI Engine Model</label>
+        <div class="relative">
+          <button id="model-dropdown-toggle" class="w-full bg-slate-900/90 border border-slate-800 hover:border-slate-700 text-slate-200 text-xs font-medium rounded-xl p-3 flex items-center justify-between transition shadow-inner">
+            <span id="current-model-label" class="flex items-center gap-2 truncate">Claude 3.5 Sonnet</span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400"></i>
+          </button>
+          <div id="model-dropdown-menu" class="hidden absolute bottom-full left-0 right-0 mb-1.5 bg-darkcard border border-darkborder rounded-xl shadow-2xl z-50 overflow-hidden py-1 divide-y divide-darkborder">
+            <div class="model-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition" data-value="anthropic/claude-3.5-sonnet" data-label="Claude 3.5 Sonnet">
+              Claude 3.5 Sonnet (Best Coding)
+            </div>
+            <div class="model-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition" data-value="openai/gpt-4o" data-label="GPT-4o">
+              GPT-4o (Logic & General)
+            </div>
+            <div class="model-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition" data-value="deepseek/deepseek-chat" data-label="DeepSeek V3">
+              DeepSeek V3 (Ultra Fast)
+            </div>
+            <div class="model-option p-3 hover:bg-slate-800/60 cursor-pointer text-xs font-medium transition" data-value="google/gemini-2.0-flash-001" data-label="Gemini 2.0 Flash">
+              Gemini 2.0 Flash
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Chat History -->
-      <div class="flex-1 overflow-y-auto p-3 space-y-1" id="history-list">
-      </div>
+      <div class="flex-1 overflow-y-auto p-3 space-y-1.5" id="history-list"></div>
 
-      <!-- SIDEBAR AD SLOT -->
-      <div class="p-2 border-t border-darkborder text-center bg-slate-950/50">
-        <div class="text-[10px] text-slate-500 mb-1">SPONSORED</div>
-        <div class="min-h-[100px] bg-slate-900/50 border border-dashed border-slate-800 rounded flex items-center justify-center text-xs text-slate-500 p-2">
-          <!-- PASTE YOUR NATIVE AD SCRIPT HERE -->
-          📌 Sidebar Native Ad
-        </div>
+      <!-- SIDEBAR AD SLOT (Clean & Invisible until Ad code added) -->
+      <div id="sidebar-ad-slot" class="p-2 border-t border-darkborder bg-darkcard/30">
+        <!-- PASTE YOUR ADSTERRA NATIVE AD SCRIPT HERE -->
       </div>
 
     </aside>
@@ -110,47 +131,50 @@
     <!-- MAIN CHAT AREA -->
     <main class="flex-1 flex flex-col bg-darkbg relative">
       
-      <!-- Mobile Bar -->
-      <div class="md:hidden flex items-center justify-between p-3 border-b border-darkborder bg-darkcard">
-        <button id="toggle-sidebar" class="p-2 rounded-lg bg-slate-800 text-slate-200">
+      <!-- Mobile Top Navbar -->
+      <div class="md:hidden flex items-center justify-between p-3.5 border-b border-darkborder bg-darkcard/80 backdrop-blur-md z-10">
+        <button id="toggle-sidebar" class="p-2 rounded-xl bg-slate-800/80 text-slate-200 active:scale-95 transition">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
-        <span class="font-bold text-sm">NEXUS AI Studio</span>
-        <button id="toggle-preview" class="p-2 rounded-lg bg-slate-800 text-slate-200">
+        <span class="font-bold text-sm tracking-wide bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">NEXUS AI Studio</span>
+        <button id="toggle-preview" class="p-2 rounded-xl bg-slate-800/80 text-slate-200 active:scale-95 transition">
           <i data-lucide="code" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <!-- Messages Area -->
-      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
-        <div class="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500 space-y-3" id="welcome-screen">
-          <div class="p-4 bg-slate-900 rounded-full border border-slate-800 text-brand-500">
+      <!-- Messages Stream Area -->
+      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+        <div class="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500 space-y-4" id="welcome-screen">
+          <div class="p-4 bg-gradient-to-tr from-brand-900/40 to-slate-900 rounded-2xl border border-slate-800/80 text-brand-500 shadow-xl shadow-brand-950/50">
             <i data-lucide="sparkles" class="w-8 h-8"></i>
           </div>
-          <h2 class="text-xl font-bold text-slate-200">How can NEXUS AI help you today?</h2>
-          <p class="text-xs max-w-sm text-slate-400">Select an execution mode from the sidebar and start chatting or building complex apps instantly.</p>
+          <div>
+            <h2 class="text-xl md:text-2xl font-black text-slate-100 mb-1">What would you like to build?</h2>
+            <p class="text-xs md:text-sm text-slate-400 max-w-md">Experience professional intelligence with lightning-fast streaming and instant live sandbox preview.</p>
+          </div>
         </div>
       </div>
 
-      <!-- INPUT AREA -->
-      <div class="p-4 border-t border-darkborder bg-darkcard">
+      <!-- INPUT CONTAINER -->
+      <div class="p-3 md:p-5 border-t border-darkborder bg-darkcard/80 backdrop-blur-md">
         <div class="max-w-4xl mx-auto flex flex-col gap-2">
           
-          <div class="relative flex items-end bg-slate-900 border border-slate-700 rounded-xl focus-within:border-brand-500 p-2 transition">
-            <textarea id="user-input" rows="2" placeholder="Ask anything, write code, or build complex projects..." class="w-full bg-transparent border-none text-slate-100 placeholder-slate-500 resize-none outline-none text-sm p-2 max-h-32"></textarea>
+          <div class="relative flex items-end bg-slate-900/90 border border-slate-800 focus-within:border-brand-500 rounded-2xl p-2 transition shadow-lg">
+            <textarea id="user-input" rows="1" placeholder="Type prompt or code requirement..." class="w-full bg-transparent border-none text-slate-100 placeholder-slate-500 resize-none outline-none text-sm p-2.5 max-h-32"></textarea>
 
-            <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
-              <button id="mic-btn" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition" title="Voice Input">
+            <div class="flex items-center gap-1.5 pl-2 border-l border-slate-800/80">
+              <button id="mic-btn" class="p-2 hover:bg-slate-800 rounded-xl text-slate-400 hover:text-white transition" title="Voice Input">
                 <i data-lucide="mic" class="w-5 h-5"></i>
               </button>
-              <button id="send-btn" class="p-2.5 bg-brand-600 hover:bg-brand-500 rounded-lg text-white font-medium transition shadow-lg shadow-brand-600/30">
+              <button id="send-btn" class="p-2.5 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 rounded-xl text-white font-medium transition shadow-lg shadow-brand-600/30 active:scale-95">
                 <i data-lucide="send" class="w-5 h-5"></i>
               </button>
             </div>
           </div>
 
           <div class="flex justify-between items-center text-[11px] text-slate-500 px-1">
-            <span>Powered by OpenRouter AI Engines</span>
+            <span>Encrypted Proxy Engine Active</span>
+            <span>Nexus AI v3.0 Production</span>
           </div>
 
         </div>
@@ -158,13 +182,13 @@
     </main>
 
     <!-- LIVE PREVIEW DRAWER -->
-    <div id="preview-drawer" class="hidden w-full md:w-1/2 bg-slate-900 border-l border-darkborder flex flex-col z-30 absolute md:relative right-0 inset-y-0">
-      <div class="p-3 border-b border-darkborder bg-darkcard flex items-center justify-between">
+    <div id="preview-drawer" class="hidden w-full md:w-1/2 bg-darkcard border-l border-darkborder flex flex-col z-40 absolute md:relative right-0 inset-y-0 shadow-2xl">
+      <div class="p-3.5 border-b border-darkborder bg-slate-900/90 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <i data-lucide="play-circle" class="w-4 h-4 text-emerald-400"></i>
-          <span class="font-bold text-sm text-slate-200">Live Web Sandbox Preview</span>
+          <span class="font-bold text-xs text-slate-200 uppercase tracking-wider">Live Web Sandbox Preview</span>
         </div>
-        <button id="close-preview" class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white">
+        <button id="close-preview" class="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -176,29 +200,80 @@
   <script>
     lucide.createIcons();
 
-    // HARDCODED DIRECT BACKEND ENDPOINT (No popups / No settings required for public users)
     const PROXY_URL = '/api/chat';
-
     let currentChatHistory = [];
+    let selectedModeValue = 'normal';
+    let selectedModelValue = 'anthropic/claude-3.5-sonnet';
 
     const chatContainer = document.getElementById('chat-messages');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
-    const modeSelect = document.getElementById('mode-select');
-    const modelSelect = document.getElementById('model-select');
     const previewDrawer = document.getElementById('preview-drawer');
     const sandboxFrame = document.getElementById('sandbox-frame');
     const welcomeScreen = document.getElementById('welcome-screen');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
 
-    const MODE_PROMPTS = {
-      normal: "You are a helpful, smart AI assistant. Answer clearly and politely.",
-      coding: "You are an expert Senior Full-Stack Software Engineer. Output pristine, production-ready code with complete syntax highlighting and clear multi-file structure.",
-      agentic: "You are an Autonomous AI System Architect. Break down tasks into a step-by-step plan, provide complete full code implementations (HTML/CSS/JS/Python), and verify errors."
-    };
+    // Custom Mode Dropdown Logic
+    const modeToggle = document.getElementById('mode-dropdown-toggle');
+    const modeMenu = document.getElementById('mode-dropdown-menu');
+    const modeLabel = document.getElementById('current-mode-label');
 
-    document.getElementById('toggle-sidebar').addEventListener('click', () => {
-      document.getElementById('sidebar').classList.toggle('-translate-x-full');
+    modeToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modeMenu.classList.toggle('hidden');
+      modelMenu.classList.add('hidden');
     });
+
+    document.querySelectorAll('.mode-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        selectedModeValue = opt.getAttribute('data-value');
+        modeLabel.textContent = opt.getAttribute('data-label');
+        modeMenu.classList.add('hidden');
+      });
+    });
+
+    // Custom Model Dropdown Logic
+    const modelToggle = document.getElementById('model-dropdown-toggle');
+    const modelMenu = document.getElementById('model-dropdown-menu');
+    const modelLabel = document.getElementById('current-model-label');
+
+    modelToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modelMenu.classList.toggle('hidden');
+      modeMenu.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.model-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        selectedModelValue = opt.getAttribute('data-value');
+        modelLabel.textContent = opt.getAttribute('data-label');
+        modelMenu.classList.add('hidden');
+      });
+    });
+
+    // Close dropdowns on outside click
+    window.addEventListener('click', () => {
+      modeMenu.classList.add('hidden');
+      modelMenu.classList.add('hidden');
+    });
+
+    // Mobile Sidebar Toggle & Auto-Close
+    function toggleMobileSidebar() {
+      sidebar.classList.toggle('-translate-x-full');
+      sidebarBackdrop.classList.toggle('hidden');
+    }
+
+    document.getElementById('toggle-sidebar').addEventListener('click', toggleMobileSidebar);
+    sidebarBackdrop.addEventListener('click', toggleMobileSidebar);
+
+    // Auto-close sidebar on mobile when option selected
+    document.querySelectorAll('.mode-option, .model-option').forEach(el => {
+      el.addEventListener('click', () => {
+        if(window.innerWidth < 768) toggleMobileSidebar();
+      });
+    });
+
     document.getElementById('toggle-preview').addEventListener('click', () => {
       previewDrawer.classList.toggle('hidden');
     });
@@ -209,7 +284,16 @@
       currentChatHistory = [];
       chatContainer.innerHTML = '';
       if(welcomeScreen) chatContainer.appendChild(welcomeScreen);
+      if(window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+        toggleMobileSidebar();
+      }
     });
+
+    const MODE_PROMPTS = {
+      normal: "You are a helpful, intelligent AI assistant. Answer clearly, accurately and politely.",
+      coding: "You are an expert Senior Full-Stack Software Engineer. Output pristine, robust production code with clean syntax highlighting and clear modular structure.",
+      agentic: "You are an Autonomous Systems Architect. Break down tasks systematically, output complete full-code implementations (HTML/CSS/JS/Python), and ensure flawless execution."
+    };
 
     sendBtn.addEventListener('click', handleSendMessage);
     userInput.addEventListener('keydown', (e) => {
@@ -230,9 +314,7 @@
       appendMessage('user', text);
       userInput.value = '';
 
-      const modeKey = modeSelect.value;
-      const systemPrompt = MODE_PROMPTS[modeKey];
-      
+      const systemPrompt = MODE_PROMPTS[selectedModeValue];
       currentChatHistory.push({ role: 'user', content: text });
 
       const apiMessages = [
@@ -240,20 +322,20 @@
         ...currentChatHistory
       ];
 
-      const aiMsgElement = appendMessage('assistant', '...Thinking...');
+      const aiMsgElement = appendMessage('assistant', 'Thinking...');
 
       try {
         const response = await fetch(PROXY_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            model: modelSelect.value,
+            model: selectedModelValue,
             messages: apiMessages,
-            temperature: modeKey === 'agentic' ? 0.2 : 0.7
+            temperature: selectedModeValue === 'agentic' ? 0.2 : 0.7
           })
         });
 
-        if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
+        if (!response.ok) throw new Error(`Server Error: ${response.statusText}`);
 
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
@@ -294,22 +376,22 @@
         }
 
       } catch (err) {
-        aiMsgElement.innerHTML = `<span class="text-rose-400 font-semibold">Error: Could not get response. Please check backend API Key.</span>`;
+        aiMsgElement.innerHTML = `<span class="text-rose-400 font-semibold">Error connecting to backend proxy. Please verify Vercel deployment.</span>`;
       }
     }
 
     function appendMessage(role, content) {
       const msgWrapper = document.createElement('div');
-      msgWrapper.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'}`;
+      msgWrapper.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} w-full animate-fadeIn`;
 
       const msgBubble = document.createElement('div');
-      msgBubble.className = `max-w-[85%] md:max-w-[75%] rounded-2xl p-4 text-sm leading-relaxed ${
+      msgBubble.className = `max-w-[90%] md:max-w-[75%] rounded-2xl p-4 text-sm leading-relaxed ${
         role === 'user' 
-          ? 'bg-brand-600 text-white rounded-br-none shadow-md' 
-          : 'bg-slate-800/90 text-slate-100 rounded-bl-none border border-slate-700/60 prose prose-invert'
+          ? 'bg-gradient-to-r from-brand-600 to-indigo-600 text-white rounded-br-none shadow-lg' 
+          : 'bg-darkcard text-slate-100 rounded-bl-none border border-darkborder shadow-xl prose prose-invert'
       }`;
 
-      msgBubble.innerHTML = role === 'user' ? content : marked.parse(content);
+      msgBubble.innerHTML = role === 'user' ? content : (content === 'Thinking...' ? '<span class="animate-pulse text-slate-400">Thinking...</span>' : marked.parse(content));
       msgWrapper.appendChild(msgBubble);
       chatContainer.appendChild(msgWrapper);
       chatContainer.scrollTop = chatContainer.scrollHeight;
@@ -317,7 +399,7 @@
       return msgBubble;
     }
 
-    // Voice Input
+    // Voice Input Integration
     const micBtn = document.getElementById('mic-btn');
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
