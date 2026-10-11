@@ -31,8 +31,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
+  <!-- ADSTERRA POPUNDER CODE HERE (Optional) -->
+
   <style>
-    /* Custom Scrollbar Styling */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0B0F17; }
     ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 4px; }
@@ -43,11 +44,11 @@
 </head>
 <body class="bg-darkbg text-slate-100 h-full flex flex-col font-sans overflow-hidden">
 
-  <!-- TOP AD BANNER SLOT (Header Banner) -->
+  <!-- TOP AD BANNER SLOT -->
   <div id="top-ad-slot" class="w-full bg-slate-900 border-b border-slate-800 py-1 px-4 text-center text-xs text-slate-400 flex items-center justify-center min-h-[50px]">
-    <!-- PASTE YOUR MONETAG / ADSTERRA HEADER SCRIPT HERE -->
+    <!-- PASTE YOUR BANNER AD SCRIPT HERE -->
     <div class="border border-dashed border-slate-700 px-4 py-1 rounded text-slate-500">
-      📢 Top Ad Space (Paste Banner Ad Code Here)
+      📢 Top Banner Ad Space
     </div>
   </div>
 
@@ -65,7 +66,7 @@
           </div>
           <span class="font-bold text-lg tracking-wide text-white">NEXUS <span class="text-brand-500">AI</span></span>
         </div>
-        <button id="new-chat-btn" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition">
+        <button id="new-chat-btn" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition" title="New Chat">
           <i data-lucide="square-pen" class="w-5 h-5"></i>
         </button>
       </div>
@@ -80,36 +81,36 @@
         </select>
       </div>
 
-      <!-- Chat History List -->
+      <!-- AI Model Selector -->
+      <div class="p-4 border-b border-darkborder">
+        <label class="text-xs text-slate-400 font-semibold uppercase tracking-wider block mb-2">AI Model</label>
+        <select id="model-select" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg p-2 focus:border-brand-500 outline-none">
+          <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Best Coding)</option>
+          <option value="openai/gpt-4o">GPT-4o (Logic & General)</option>
+          <option value="deepseek/deepseek-chat">DeepSeek V3 (Ultra Fast)</option>
+          <option value="google/gemini-2.0-flash-001">Gemini 2.0 Flash</option>
+        </select>
+      </div>
+
+      <!-- Chat History -->
       <div class="flex-1 overflow-y-auto p-3 space-y-1" id="history-list">
-        <!-- Dynamic History Items Will Load Here -->
       </div>
 
       <!-- SIDEBAR AD SLOT -->
       <div class="p-2 border-t border-darkborder text-center bg-slate-950/50">
         <div class="text-[10px] text-slate-500 mb-1">SPONSORED</div>
         <div class="min-h-[100px] bg-slate-900/50 border border-dashed border-slate-800 rounded flex items-center justify-center text-xs text-slate-500 p-2">
-          <!-- PASTE YOUR SIDEBAR AD SCRIPT HERE -->
-          📌 Sidebar Native Ad Slot
+          <!-- PASTE YOUR NATIVE AD SCRIPT HERE -->
+          📌 Sidebar Native Ad
         </div>
       </div>
 
-      <!-- Settings & Status Footer -->
-      <div class="p-3 border-t border-darkborder bg-slate-950 flex items-center justify-between text-xs text-slate-400">
-        <button id="open-settings-btn" class="flex items-center gap-2 hover:text-white transition">
-          <i data-lucide="settings" class="w-4 h-4"></i>
-          <span>Settings</span>
-        </button>
-        <div id="cost-tracker" class="text-slate-400 font-mono">
-          Est: <span class="text-emerald-400">$0.000</span>
-        </div>
-      </div>
     </aside>
 
     <!-- MAIN CHAT AREA -->
     <main class="flex-1 flex flex-col bg-darkbg relative">
       
-      <!-- Mobile Header Overlay Bar -->
+      <!-- Mobile Bar -->
       <div class="md:hidden flex items-center justify-between p-3 border-b border-darkborder bg-darkcard">
         <button id="toggle-sidebar" class="p-2 rounded-lg bg-slate-800 text-slate-200">
           <i data-lucide="menu" class="w-5 h-5"></i>
@@ -120,17 +121,23 @@
         </button>
       </div>
 
-      <!-- Messages Display Container -->
+      <!-- Messages Area -->
       <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
-        <!-- Messages rendered dynamically -->
+        <div class="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500 space-y-3" id="welcome-screen">
+          <div class="p-4 bg-slate-900 rounded-full border border-slate-800 text-brand-500">
+            <i data-lucide="sparkles" class="w-8 h-8"></i>
+          </div>
+          <h2 class="text-xl font-bold text-slate-200">How can NEXUS AI help you today?</h2>
+          <p class="text-xs max-w-sm text-slate-400">Select an execution mode from the sidebar and start chatting or building complex apps instantly.</p>
+        </div>
       </div>
 
-      <!-- BOTTOM CHAT INPUT AREA -->
+      <!-- INPUT AREA -->
       <div class="p-4 border-t border-darkborder bg-darkcard">
         <div class="max-w-4xl mx-auto flex flex-col gap-2">
           
           <div class="relative flex items-end bg-slate-900 border border-slate-700 rounded-xl focus-within:border-brand-500 p-2 transition">
-            <textarea id="user-input" rows="2" placeholder="Ask anything, generate code, or request agentic builds..." class="w-full bg-transparent border-none text-slate-100 placeholder-slate-500 resize-none outline-none text-sm p-2 max-h-32"></textarea>
+            <textarea id="user-input" rows="2" placeholder="Ask anything, write code, or build complex projects..." class="w-full bg-transparent border-none text-slate-100 placeholder-slate-500 resize-none outline-none text-sm p-2 max-h-32"></textarea>
 
             <div class="flex items-center gap-2 pl-2 border-l border-slate-800">
               <button id="mic-btn" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition" title="Voice Input">
@@ -144,14 +151,13 @@
 
           <div class="flex justify-between items-center text-[11px] text-slate-500 px-1">
             <span>Powered by OpenRouter AI Engines</span>
-            <span>Tokens: <span id="token-counter" class="font-mono text-slate-400">0</span></span>
           </div>
 
         </div>
       </div>
     </main>
 
-    <!-- HTML/CSS LIVE PREVIEW DRAWER (WORKSPACE PANEL) -->
+    <!-- LIVE PREVIEW DRAWER -->
     <div id="preview-drawer" class="hidden w-full md:w-1/2 bg-slate-900 border-l border-darkborder flex flex-col z-30 absolute md:relative right-0 inset-y-0">
       <div class="p-3 border-b border-darkborder bg-darkcard flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -167,96 +173,29 @@
 
   </div>
 
-  <!-- SETTINGS MODAL -->
-  <div id="settings-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-darkcard border border-darkborder rounded-xl w-full max-w-md p-6 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <h3 class="font-bold text-lg text-white">API Settings</h3>
-        <button id="close-settings" class="text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">OpenRouter API Key (Optional if Backend API Proxy is Set)</label>
-          <input type="password" id="api-key-input" placeholder="sk-or-v1-..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm outline-none focus:border-brand-500 text-slate-100">
-          <p class="text-[11px] text-slate-500 mt-1">Saved locally in your browser storage.</p>
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">Backend Proxy URL (For Hidden API Key Setup)</label>
-          <input type="text" id="proxy-url-input" placeholder="https://your-proxy.vercel.app/api/chat" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm outline-none focus:border-brand-500 text-slate-100">
-          <p class="text-[11px] text-slate-500 mt-1">Leave empty if using direct OpenRouter Key above.</p>
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">AI Model Selector</label>
-          <select id="model-select" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 outline-none focus:border-brand-500">
-            <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Recommended Coding)</option>
-            <option value="openai/gpt-4o">GPT-4o (Strong General & Logic)</option>
-            <option value="deepseek/deepseek-chat">DeepSeek V3 (Fast & Affordable)</option>
-            <option value="google/gemini-2.0-flash-001">Gemini 2.0 Flash</option>
-          </select>
-        </div>
-      </div>
-
-      <button id="save-settings-btn" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 rounded-lg font-medium text-white transition">Save Changes</button>
-    </div>
-  </div>
-
-  <!-- APPLICATION JAVASCRIPT LOGIC -->
   <script>
-    // Lucide Icons Render
     lucide.createIcons();
 
-    // App State Management
-    let apiKey = localStorage.getItem('nexus_api_key') || '';
-    let proxyUrl = localStorage.getItem('nexus_proxy_url') || '';
-    let selectedModel = localStorage.getItem('nexus_model') || 'anthropic/claude-3.5-sonnet';
-    let currentChatHistory = [];
-    let promptCounter = 0;
+    // HARDCODED DIRECT BACKEND ENDPOINT (No popups / No settings required for public users)
+    const PROXY_URL = '/api/chat';
 
-    // DOM Elements
+    let currentChatHistory = [];
+
     const chatContainer = document.getElementById('chat-messages');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     const modeSelect = document.getElementById('mode-select');
-    const settingsModal = document.getElementById('settings-modal');
-    const apiKeyInput = document.getElementById('api-key-input');
-    const proxyUrlInput = document.getElementById('proxy-url-input');
     const modelSelect = document.getElementById('model-select');
     const previewDrawer = document.getElementById('preview-drawer');
     const sandboxFrame = document.getElementById('sandbox-frame');
+    const welcomeScreen = document.getElementById('welcome-screen');
 
-    // Load Settings
-    apiKeyInput.value = apiKey;
-    proxyUrlInput.value = proxyUrl;
-    modelSelect.value = selectedModel;
-
-    // Mode Prompts Dictionary
     const MODE_PROMPTS = {
-      normal: "You are a helpful, smart AI assistant. Answer clearly, accurately, and politely.",
-      coding: "You are an expert Senior Full-Stack Software Engineer. Output pristine, production-ready code with complete syntax highlighting, step-by-step logic, clear structures, and zero fluff.",
-      agentic: "You are an Autonomous AI System Architect & Lead Developer. Break down every request into an execution plan, detail architectural decisions, provide full complete codebase implementations (HTML/CSS/JS/Python), verify syntax errors, and offer actionable optimizations."
+      normal: "You are a helpful, smart AI assistant. Answer clearly and politely.",
+      coding: "You are an expert Senior Full-Stack Software Engineer. Output pristine, production-ready code with complete syntax highlighting and clear multi-file structure.",
+      agentic: "You are an Autonomous AI System Architect. Break down tasks into a step-by-step plan, provide complete full code implementations (HTML/CSS/JS/Python), and verify errors."
     };
 
-    // Open/Close Settings
-    document.getElementById('open-settings-btn').addEventListener('click', () => settingsModal.classList.remove('hidden'));
-    document.getElementById('close-settings').addEventListener('click', () => settingsModal.classList.add('hidden'));
-    
-    document.getElementById('save-settings-btn').addEventListener('click', () => {
-      localStorage.setItem('nexus_api_key', apiKeyInput.value.trim());
-      localStorage.setItem('nexus_proxy_url', proxyUrlInput.value.trim());
-      localStorage.setItem('nexus_model', modelSelect.value);
-      apiKey = apiKeyInput.value.trim();
-      proxyUrl = proxyUrlInput.value.trim();
-      selectedModel = modelSelect.value;
-      settingsModal.classList.add('hidden');
-      alert('Settings Saved Successfully!');
-    });
-
-    // Mobile Sidebar & Preview Toggle
     document.getElementById('toggle-sidebar').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('-translate-x-full');
     });
@@ -266,8 +205,12 @@
     document.getElementById('close-preview').addEventListener('click', () => {
       previewDrawer.classList.add('hidden');
     });
+    document.getElementById('new-chat-btn').addEventListener('click', () => {
+      currentChatHistory = [];
+      chatContainer.innerHTML = '';
+      if(welcomeScreen) chatContainer.appendChild(welcomeScreen);
+    });
 
-    // Send Message Trigger
     sendBtn.addEventListener('click', handleSendMessage);
     userInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -276,32 +219,17 @@
       }
     });
 
-    // Ad Interstitial Trigger Simulation
-    function triggerAdCheck() {
-      promptCounter++;
-      // Har 5 prompts ke baad Interstitial / Popunder Ad Hook
-      if (promptCounter % 5 === 0) {
-        console.log("Triggering Adsterra / Monetag Popunder Event...");
-        // Agar aapke pas direct ad script function hai toh yahan call karein:
-        // if (typeof show_popunder_ad === 'function') show_popunder_ad();
-      }
-    }
-
     async function handleSendMessage() {
       const text = userInput.value.trim();
       if (!text) return;
 
-      if (!apiKey && !proxyUrl) {
-        alert('Please configure your OpenRouter API Key or Proxy URL in Settings first!');
-        settingsModal.classList.remove('hidden');
-        return;
+      if (welcomeScreen && welcomeScreen.parentNode) {
+        welcomeScreen.parentNode.removeChild(welcomeScreen);
       }
 
-      // Append User Message to UI
       appendMessage('user', text);
       userInput.value = '';
 
-      // Prepare Messages for API
       const modeKey = modeSelect.value;
       const systemPrompt = MODE_PROMPTS[modeKey];
       
@@ -312,49 +240,25 @@
         ...currentChatHistory
       ];
 
-      // Append AI Message Placeholder
       const aiMsgElement = appendMessage('assistant', '...Thinking...');
 
-      triggerAdCheck(); // Ad Hook Trigger
-
       try {
-        let response;
-        
-        // Agar Proxy URL setup hai toh server proxy route par bhejo, varna Direct OpenRouter API call
-        if (proxyUrl) {
-          response = await fetch(proxyUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              model: selectedModel,
-              messages: apiMessages,
-              temperature: modeKey === 'agentic' ? 0.2 : 0.7
-            })
-          });
-        } else {
-          response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Authorization": `Bearer ${apiKey}`,
-              "Content-Type": "application/json",
-              "HTTP-Referer": window.location.href,
-              "X-Title": "NEXUS AI Studio"
-            },
-            body: JSON.stringify({
-              model: selectedModel,
-              messages: apiMessages,
-              stream: true
-            })
-          });
-        }
+        const response = await fetch(PROXY_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: modelSelect.value,
+            messages: apiMessages,
+            temperature: modeKey === 'agentic' ? 0.2 : 0.7
+          })
+        });
 
         if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
 
-        // Stream Processing
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let fullResponseText = '';
-        aiMsgElement.innerHTML = ''; // Clear placeholder
+        aiMsgElement.innerHTML = '';
 
         while (true) {
           const { done, value } = await reader.read();
@@ -373,18 +277,14 @@
                 fullResponseText += contentChunk;
                 aiMsgElement.innerHTML = marked.parse(fullResponseText);
                 chatContainer.scrollTop = chatContainer.scrollHeight;
-              } catch (err) {
-                // Ignore parse errors on stream boundaries
-              }
+              } catch (err) {}
             }
           }
         }
 
-        // Finalize Code Highlighting & Sandbox Live Preview Detection
         hljs.highlightAll();
         currentChatHistory.push({ role: 'assistant', content: fullResponseText });
         
-        // Auto-extract HTML/CSS/JS code blocks to Live Preview Sandbox
         if (fullResponseText.includes('```html')) {
           const codeMatch = fullResponseText.match(/```html([\s\S]*?)```/);
           if (codeMatch && codeMatch[1]) {
@@ -394,7 +294,7 @@
         }
 
       } catch (err) {
-        aiMsgElement.innerHTML = `<span class="text-rose-400 font-semibold">Error: ${err.message}</span>`;
+        aiMsgElement.innerHTML = `<span class="text-rose-400 font-semibold">Error: Could not get response. Please check backend API Key.</span>`;
       }
     }
 
@@ -417,7 +317,7 @@
       return msgBubble;
     }
 
-    // Voice Input Setup (Speech to Text)
+    // Voice Input
     const micBtn = document.getElementById('mic-btn');
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -431,15 +331,13 @@
       });
 
       recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        userInput.value += (userInput.value ? ' ' : '') + transcript;
+        userInput.value += (userInput.value ? ' ' : '') + event.results[0][0].transcript;
         micBtn.classList.remove('text-rose-500', 'animate-pulse');
       };
-
       recognition.onerror = () => micBtn.classList.remove('text-rose-500', 'animate-pulse');
       recognition.onend = () => micBtn.classList.remove('text-rose-500', 'animate-pulse');
     } else {
-      micBtn.style.display = 'none'; // Voice not supported
+      micBtn.style.display = 'none';
     }
   </script>
 </body>
